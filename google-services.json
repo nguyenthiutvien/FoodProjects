@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "340021766619",
+    "project_id": "fooddif",
+    "storage_bucket": "fooddif.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340021766619:android:65ec98cb107cfe32905ffe",
+        "android_client_info": {
+          "package_name": "foodDif.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBQuheKz9wCi2GmJ_NyKLt9fkGLHDXgcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
