@@ -1,7 +1,13 @@
 import React, { useEffect,useState,useRef } from "react";
 import { Alert } from "react-native";
-import * as FirebaseDynamicLinks from 'expo-firebase-dynamic-links';
-import { initializeApp, getApps } from '@react-native-firebase/app'; 
+import {
+  initializeApp,
+  getApps,
+} from '@react-native-firebase/app';
+import {
+  buildShortLink,
+} from '@react-native-firebase/dynamic-links';
+
 import {
   Animated,
   PanResponder,
@@ -110,34 +116,34 @@ const DetailItem = ({route}) => {
     }
   };
   
-  useEffect(() => {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDYOW-wJmEzgMU3qEgjKNLAvEuAmjb4EyU",
-      authDomain: "foodapp-3e096.firebaseapp.com",
-      projectId: "foodapp-3e096",
-      messagingSenderId: "362380793518",
-      appId: "1:362380793518:android:0fc67c43fe1108f7153f3f",
-    };
+  // useEffect(() => {
+  //   const firebaseConfig = {
+  //     apiKey: "AIzaSyDYOW-wJmEzgMU3qEgjKNLAvEuAmjb4EyU",
+  //     authDomain: "foodapp-3e096.firebaseapp.com",
+  //     projectId: "foodapp-3e096",
+  //     messagingSenderId: "362380793518",
+  //     appId: "1:362380793518:android:0fc67c43fe1108f7153f3f",
+  //   };
 
-    if (getApps().length === 0) {
-      initializeApp(firebaseConfig);
-    }
+  //   if (getApps().length === 0) {
+  //     initializeApp(firebaseConfig);
+  //   }
 
-    fetchDataOrder();
-  }, []);
+  //   fetchDataOrder();
+  // }, []);
 
-  const handleShare = async () => {
-    try {
-      const { shortLink } = await FirebaseDynamicLinks.buildShortLinkAsync({
-        link: `https://diffood.page.link/qbvQ`,
-        domainUriPrefix: 'https://diffood.page.link',
-      });
+  // const handleShare = async () => {
+  //   try {
+  //     const { shortLink } = await FirebaseDynamicLinks.buildShortLinkAsync({
+  //       link: `https://diffood.page.link/qbvQ`,
+  //       domainUriPrefix: 'https://diffood.page.link',
+  //     });
 
-      console.log('Short Link:', shortLink);
-    } catch (error) {
-      Alert.alert('Error', 'An error occurred while creating the dynamic link.');
-    }
-  };
+  //     console.log('Short Link:', shortLink);
+  //   } catch (error) {
+  //     Alert.alert('Error', 'An error occurred while creating the dynamic link.');
+  //   }
+  // };
 
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -192,7 +198,23 @@ const DetailItem = ({route}) => {
       },
     ],
   };
+ const handleShare = async () => {
+    try {
+      const link = await buildShortLink({
+        link: 'https://diffood.page.link/qbvQ/' + itemId,
+        domainUriPrefix: 'https://diffood.page.link/',
+        android: {
+          packageName: 'com.example.android',
+          fallbackUrl: 'https://example.com',
+        }
+      });
 
+      console.log('Dynamic link created:', link);
+    } catch (error) {
+      console.error('Error creating dynamic link:', error);
+      Alert.alert('Error', 'Failed to create dynamic link.');
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -296,9 +318,7 @@ const DetailItem = ({route}) => {
             </View>
             
           </View>
-          
-        
-          
+
         </View>
         <View style={styles.Testimonials}>
           <View style={styles.TestimonialsContent}>
@@ -327,13 +347,10 @@ const DetailItem = ({route}) => {
         >
           <Text style={styles.addToCartText}>Add to Cart</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-        style={styles.shareButton}
-        onPress={handleShare}
-      >
-        <Text style={styles.shareButtonText}>Share</Text>
-      </TouchableOpacity>
-</View>
+        <TouchableOpacity onPress={handleShare} style={styles.shareButton}>
+            <Text style={styles.addToCartText}>Share</Text>
+          </TouchableOpacity>
+        </View>
         
         
       </Animated.View>
@@ -444,7 +461,7 @@ const styles = StyleSheet.create({
     marginLeft: 27,
     marginTop: 15,
     fontSize: 15,
-    color: "#555", // Adjust the color
+    color: "#555", 
   },
   bulletPoint: {
     flexDirection: "row",
@@ -455,14 +472,14 @@ const styles = StyleSheet.create({
   bulletPointText: {
     fontSize: 13,
     marginLeft: 5,
-    color: "#555", // Adjust the color
+    color: "#555", 
   },
   paragraphText2: {
     marginHorizontal: 15,
     marginLeft: 27,
     marginTop: 15,
     fontSize: 15,
-    color: "#555", // Adjust the color
+    color: "#555", 
   },
   Texttitle: {
     fontSize: 23,
@@ -524,6 +541,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 140,
     borderRadius: 20,
     marginTop: 15,
+  },
+  shareButton: {
+    backgroundColor: "pink", 
+    paddingVertical: 20,
+    paddingHorizontal: 140,
+    borderRadius: 20,
+    marginTop: 15,
+    
   },
   addToCartText: {
     color: "white",

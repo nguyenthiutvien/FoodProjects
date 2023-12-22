@@ -27,13 +27,13 @@
       "favicon": "./assets/icon.png"
     },
     "extra": {
-      "firebase": {
-        "apiKey": "AIzaSyDYOW-wJmEzgMU3qEgjKNLAvEuAmjb4EyU",
+      "firebaseDynamicLinks": {
+        "api_key": "AIzaSyDYOW-wJmEzgMU3qEgjKNLAvEuAmjb4EyU",
         "authDomain": "foodapp-3e096.firebaseapp.com",
         "projectId": "foodapp-3e096",
         // "storageBucket": "your-storage-bucket",
         "messagingSenderId": "362380793518",
-        "appId": "1:362380793518:android:0fc67c43fe1108f7153f3f",
+        "appId": "1:362380793518:android:0fc67c43fe1108f7153f3f"
         // "measurementId": "your-measurement-id"
       }
     }

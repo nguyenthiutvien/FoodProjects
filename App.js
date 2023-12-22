@@ -16,8 +16,6 @@ import { Home, Location, Header,Search,Detailrestaurant, Chat,PopularMenu, Popul
 import ChatItem from './screens/chatItem';
 
 
-
-
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
                                                                

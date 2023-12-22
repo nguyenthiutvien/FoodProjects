@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 const image = require("../assets/Home.png");
+import { WebView } from 'react-native-webview';
 
 const Phone = ({ navigation }) => {
   const [verificationCode, setVerificationCode] = useState("");
@@ -41,12 +42,16 @@ const Phone = ({ navigation }) => {
       >
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
+      <WebView source={{ uri: 'https://example.com' }} style={styles.webview} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  webview: {
     flex: 1,
   },
   img: {
